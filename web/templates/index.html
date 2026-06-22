@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CIA Intelligence Board</title>
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            font-family:Arial, sans-serif;
+            background:#0f172a;
+            color:white;
+            display:flex;
+            min-height:100vh;
+        }
+
+        .left{
+            width:40%;
+            padding:20px;
+            border-right:1px solid #333;
+            overflow:auto;
+        }
+
+        .right{
+            width:60%;
+            padding:20px;
+            overflow:auto;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:10px;
+            border:none;
+            border-radius:6px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        .result{
+            background:#111827;
+            padding:15px;
+            border-radius:8px;
+            margin-top:10px;
+            white-space:pre-wrap;
+        }
+
+        .log{
+            background:#1e293b;
+            padding:10px;
+            margin-top:8px;
+            border-radius:6px;
+        }
+
+        .node{
+            background:#2563eb;
+            padding:12px;
+            margin-bottom:10px;
+            border-radius:8px;
+        }
+
+        .link{
+            background:#111827;
+            padding:10px;
+            margin-bottom:8px;
+            border-radius:6px;
+            color:#cbd5e1;
+        }
+
+        h2,h3{
+            color:#60a5fa;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="left">
+
+    <h2>AI Research Query</h2>
+
+    <form method="post">
+        <input
+            type="text"
+            name="query"
+            placeholder="Ask anything..."
+            required
+        >
+
+        <button type="submit">
+            Run Intelligence Analysis
+        </button>
+    </form>
+
+    <h3>Final Result</h3>
+
+    <div class="result">
+        {{ result }}
+    </div>
+
+    <h3>Execution Logs</h3>
+
+    {% if logs %}
+        {% for log in logs %}
+        <div class="log">
+            <strong>{{ log.step }}</strong>
+            <br>
+            {{ log.message }}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No logs yet.</p>
+    {% endif %}
+
+</div>
+
+<div class="right">
+
+    <h2>CIA Visual Intelligence Board</h2>
+
+    <h3>Nodes</h3>
+
+    {% if graph.nodes %}
+        {% for node in graph.nodes %}
+        <div class="node">
+            {{ node.name }} → {{ node.value }}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No nodes detected.</p>
+    {% endif %}
+
+    <h3>Links</h3>
+
+    {% if graph.links %}
+        {% for link in graph.links %}
+        <div class="link">
+            {{ link.source }}
+            →
+            {{ link.target }}
+
+            (Strength: {{ link.strength }})
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No relationships detected.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

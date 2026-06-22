@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+chroma_db/
+memory_db/
+logs/
+*.log
+.idea/
+.vscode/
